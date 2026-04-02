@@ -3,260 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday for Jahnavi</title>
+    <title>Happy Birthday Jahnavi</title>
     <style>
         :root {
-            --pink: #ff85a2;
-            --dark-pink: #f06292;
-            --bg: #fff0f3;
+            --gold: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --gold-solid: #d4af37;
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --text-light: #e0e0e0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
-            font-family: 'Arial', sans-serif;
-            color: #333;
+            background-color: var(--black);
+            color: var(--text-light);
+            font-family: 'Georgia', serif; /* Elegant serif font */
             overflow-x: hidden;
+            line-height: 1.8;
         }
 
-        /* --- Fixed Overlay --- */
+        /* --- Luxury Overlay --- */
         #overlay {
             position: fixed;
             inset: 0;
-            background: white;
+            background: var(--black);
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: 0.5s;
+            transition: opacity 1s ease;
         }
 
-        /* --- Layout --- */
-        .section {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        header h1 { color: var(--dark-pink); font-size: 2.5rem; margin-bottom: 20px; }
-
-        /* --- Countdown --- */
-        .timer {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-        .unit {
-            background: white;
-            padding: 15px 5px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        .unit span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--pink); }
-
-        /* --- Cake --- */
-        .cake-box {
-            height: 180px;
-            width: 150px;
-            margin: 0 auto;
+        .gold-btn {
+            background: var(--gold);
+            color: #000;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 2px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            position: relative;
-        }
-        .cake {
-            width: 100%;
-            height: 80px;
-            background: var(--pink);
-            position: absolute;
-            bottom: 0;
-            border-radius: 10px 10px 0 0;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
             transition: 0.3s;
         }
-        .candle {
-            width: 8px;
-            height: 30px;
-            background: #ffd54f;
+
+        .gold-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        /* --- Content Layout --- */
+        .container {
+            max-width: 800px;
             margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            background: var(--gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+        }
+
+        /* --- Countdown --- */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        .timer-box {
+            background: var(--dark-gray);
+            border: 1px solid #333;
+            padding: 20px 10px;
+            border-radius: 4px;
             position: relative;
-            top: 60px;
         }
-        .flame {
-            width: 12px;
-            height: 18px;
-            background: orange;
-            border-radius: 50% 50% 20% 20%;
+        .timer-box::after {
+            content: '';
             position: absolute;
-            top: -20px;
-            left: -2px;
-            animation: glow 0.5s infinite alternate;
+            bottom: 0; left: 0; width: 100%; height: 2px;
+            background: var(--gold);
         }
-
-        .cake.cut { transform: scaleY(0.6); filter: saturate(0.5); }
-
-        /* --- Guestbook --- */
-        .wishes {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            margin-top: 40px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .btn {
-            background: var(--dark-pink);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            width: 100%;
+        .timer-box span {
+            display: block;
+            font-size: 2rem;
+            color: var(--gold-solid);
             font-weight: bold;
         }
 
-        #wish-list div {
+        /* --- Heartfelt Message (Typewriter) --- */
+        #message-container {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            min-height: 300px;
             text-align: left;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+            font-size: 1.2rem;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+            margin-bottom: 60px;
+            white-space: pre-wrap; /* Keeps formatting */
         }
 
-        /* --- Confetti --- */
-        #confetti {
+        /* --- Interactive Gold Cake --- */
+        .cake-area {
+            position: relative;
+            height: 220px;
+            margin-bottom: 80px;
+            cursor: pointer;
+        }
+        .cake {
+            width: 180px;
+            height: 100px;
+            background: var(--gold);
+            margin: 0 auto;
+            position: relative;
+            top: 60px;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transition: 0.5s;
+        }
+        .candle {
+            width: 6px;
+            height: 40px;
+            background: #eee;
+            margin: 0 auto;
+            position: relative;
+            top: 20px;
+            border-top: 5px solid var(--gold-solid);
+        }
+        .flame {
+            width: 15px;
+            height: 22px;
+            background: #ffeb3b;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -25px;
+            left: -4.5px;
+            box-shadow: 0 0 15px #ffeb3b;
+            animation: flicker 0.6s infinite alternate;
+        }
+
+        .cake.cut { transform: scaleY(0.7); opacity: 0.8; }
+
+        /* --- Canvas for Gold Confetti --- */
+        #canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 100;
+            z-index: 1000;
         }
 
-        @keyframes glow { from { opacity: 0.6; } to { opacity: 1; } }
+        @keyframes flicker {
+            from { transform: scale(1); opacity: 0.8; }
+            to { transform: scale(1.1); opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .timer-box span { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <h2>Ready for the surprise?</h2>
-        <button class="btn" onclick="init()" style="width: auto; margin-top: 20px;">Open 🎁</button>
+        <h2 style="margin-bottom: 30px; letter-spacing: 2px;">AN EXCLUSIVE INVITATION</h2>
+        <button class="gold-btn" onclick="begin()">Enter Experience</button>
     </div>
 
-    <canvas id="confetti"></canvas>
+    <canvas id="canvas"></canvas>
 
-    <div class="section">
-        <header>
-            <h1>Happy Birthday Jahnavi! 🎂</h1>
-        </header>
+    <div class="container">
+        <h1>HAPPY BIRTHDAY JAHNAVI</h1>
 
-        <div class="timer">
-            <div class="unit"><span id="d">00</span>d</div>
-            <div class="unit"><span id="h">00</span>h</div>
-            <div class="unit"><span id="m">00</span>m</div>
-            <div class="unit"><span id="s">00</span>s</div>
+        <div class="timer-grid">
+            <div class="timer-box"><span id="days">00</span>DAYS</div>
+            <div class="timer-box"><span id="hours">00</span>HRS</div>
+            <div class="timer-box"><span id="mins">00</span>MINS</div>
+            <div class="timer-box"><span id="secs">00</span>SECS</div>
         </div>
 
-        <div id="typewriter" style="min-height: 60px; font-style: italic; margin-bottom: 30px;"></div>
+        <div id="message-container"></div>
 
-        <div class="cake-box" onclick="blowCandle()">
+        <div class="cake-area" onclick="celebrate()">
             <div class="candle"><div class="flame" id="flame"></div></div>
             <div class="cake" id="cake-body"></div>
-        </div>
-        <p style="margin-top: 10px;"><i>Click to cut the cake!</i></p>
-
-        <div class="wishes">
-            <h3>Send a Wish</h3>
-            <input type="text" id="uName" placeholder="Your Name">
-            <input type="text" id="uWish" placeholder="Your Message">
-            <button class="btn" onclick="saveWish()">Post Wish</button>
-            <div id="wish-list"></div>
+            <p style="margin-top: 80px; color: var(--gold-solid); letter-spacing: 1px;"><i>Click to ignite the celebration</i></p>
         </div>
     </div>
 
     <script>
-        // 1. Start App
-        function init() {
+        // 1. App Initiation
+        function begin() {
             document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => document.getElementById('overlay').style.display = 'none', 500);
-            startTyping();
+            setTimeout(() => {
+                document.getElementById('overlay').style.display = 'none';
+                typeWriter();
+            }, 1000);
         }
 
-        // 2. Countdown (Target: April 3, 2026)
+        // 2. Countdown Logic (April 3, 2026)
         const target = new Date("April 3, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = target - now;
             if (diff < 0) return;
-            document.getElementById('d').innerText = Math.floor(diff / (86400000));
-            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
-            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
-            document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById('days').innerText = Math.floor(diff / 86400000);
+            document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById('mins').innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById('secs').innerText = Math.floor((diff % 60000) / 1000);
         }, 1000);
 
-        // 3. Typewriter
-        const msg = "Wishing you a year full of happiness, success, and love. May all your dreams come true! ✨";
-        let charIdx = 0;
-        function startTyping() {
-            if (charIdx < msg.length) {
-                document.getElementById('typewriter').innerHTML += msg.charAt(charIdx);
-                charIdx++;
-                setTimeout(startTyping, 50);
+        // 3. Gold & White Typewriter Content
+        const content = `Dear Jahnavi,\n\nWishing you a very Happy Birthday! On this special day, I wanted to take a moment to let you know how truly wonderful it is to have you as a friend. Your kindness, your warmth, and your positive spirit make every interaction a pleasure.\n\nOver the time I have known you, I have always admired the grace with which you carry yourself and the sincerity you bring to everything you do. You are the kind of person who makes those around you feel valued and at ease — and that is a rare and beautiful quality.\n\nI hope this birthday brings you everything you deserve — good health, great joy, and all the success you have worked so hard for. May the year ahead open wonderful new doors for you and be filled with moments worth cherishing.\n\nHere's to you, Jahnavi. Have a truly memorable day.\n\nWith warm wishes,\nA Friend ✦`;
+
+        let i = 0;
+        function typeWriter() {
+            if (i < content.length) {
+                document.getElementById("message-container").innerHTML += content.charAt(i);
+                i++;
+                setTimeout(typeWriter, 40);
             }
         }
 
-        // 4. Cake & Confetti
-        function blowCandle() {
+        // 4. Luxury Celebration
+        function celebrate() {
             document.getElementById('flame').style.display = 'none';
             document.getElementById('cake-body').classList.add('cut');
-            createConfetti();
+            startGoldRain();
         }
 
-        // Confetti Logic
-        const canvas = document.getElementById('confetti');
+        // 5. Gold Rain (Confetti)
+        const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        let dots = [];
+        let goldPieces = [];
 
-        function createConfetti() {
+        function startGoldRain() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            for(let i=0; i<80; i++) {
-                dots.push({
+            for(let i=0; i<150; i++) {
+                goldPieces.push({
                     x: Math.random() * canvas.width,
-                    y: -10,
-                    size: Math.random() * 8 + 4,
-                    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
-                    v: Math.random() * 4 + 2
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 5 + 2,
+                    speed: Math.random() * 3 + 2,
+                    color: i % 2 === 0 ? '#d4af37' : '#fcf6ba', // Gold and Light Gold
+                    angle: Math.random() * 360
                 });
             }
-            draw();
+            animate();
         }
 
-        function draw() {
-            // CRITICAL: This clears the canvas so it doesn't "stretch" or ghost
+        function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            dots.forEach((d, i) => {
-                d.y += d.v;
-                ctx.fillStyle = d.color;
-                ctx.fillRect(d.x, d.y, d.size, d.size);
-                if (d.y > canvas.height) dots.splice(i, 1);
-            });
-            if (dots.length > 0) requestAnimationFrame(draw);
-        }
+            goldPieces.forEach((p, index) => {
+                p.y += p.speed;
+                p.angle += 1;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                ctx.restore();
 
-        // 5. Wishes
-        function saveWish() {
-            const n = document.getElementById('uName').value;
-            const w = document.getElementById('uWish').value;
-            if(!n || !w) return;
-            const item = `<div><strong>${n}:</strong> ${w}</div>`;
-            document.getElementById('wish-list').innerHTML = item + document.getElementById('wish-list').innerHTML;
-            document.getElementById('uName').value = ""; document.getElementById('uWish').value = "";
+                if (p.y > canvas.height) goldPieces.splice(index, 1);
+            });
+            if (goldPieces.length > 0) requestAnimationFrame(animate);
         }
     </script>
 </body>
