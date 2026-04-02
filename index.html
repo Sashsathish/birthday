@@ -3,333 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Jahnavi!</title>
+    <title>Birthday for Jahnavi</title>
     <style>
-        /* --- Root & Reset --- */
         :root {
-            --primary: #ff6b6b;
-            --secondary: #f06292;
-            --soft-pink: #fce4ec;
-            --white: #ffffff;
+            --pink: #ff85a2;
+            --dark-pink: #f06292;
+            --bg: #fff0f3;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(135deg, var(--soft-pink) 0%, #f8bbd0 100%);
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: #444;
-            min-height: 100vh;
-            line-height: 1.6;
+            background-color: var(--bg);
+            font-family: 'Arial', sans-serif;
+            color: #333;
             overflow-x: hidden;
         }
 
-        /* --- Layout Container --- */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* --- Welcome Screen (Overlay) --- */
-        #welcome-screen {
+        /* --- Fixed Overlay --- */
+        #overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
+            inset: 0;
+            background: white;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.8s ease-in-out, opacity 0.5s;
+            transition: 0.5s;
         }
 
-        .btn-main {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-            font-weight: bold;
+        /* --- Layout --- */
+        .section {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
         }
 
-        /* --- Sections --- */
-        header { padding: 40px 0; }
-        
-        .countdown-grid {
+        header h1 { color: var(--dark-pink); font-size: 2.5rem; margin-bottom: 20px; }
+
+        /* --- Countdown --- */
+        .timer {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin: 20px 0;
+            margin-bottom: 40px;
         }
-
-        .box {
-            background: var(--white);
+        .unit {
+            background: white;
             padding: 15px 5px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
+        .unit span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--pink); }
 
-        .box span {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--secondary);
-        }
-
-        /* --- Typing Section --- */
-        #typing-area {
-            min-height: 80px;
-            margin: 30px 0;
-            font-size: 1.1rem;
-            font-style: italic;
-            padding: 0 15px;
-        }
-
-        /* --- Interactive Cake --- */
-        .cake-wrapper {
-            position: relative;
-            height: 200px;
-            width: 160px;
-            margin: 40px auto;
+        /* --- Cake --- */
+        .cake-box {
+            height: 180px;
+            width: 150px;
+            margin: 0 auto;
             cursor: pointer;
+            position: relative;
         }
-
-        .cake-base {
+        .cake {
+            width: 100%;
+            height: 80px;
+            background: var(--pink);
             position: absolute;
             bottom: 0;
-            width: 100%;
-            height: 100px;
-            background: #ff80ab;
             border-radius: 10px 10px 0 0;
             transition: 0.3s;
         }
-
         .candle {
             width: 8px;
-            height: 35px;
+            height: 30px;
             background: #ffd54f;
             margin: 0 auto;
             position: relative;
-            top: 65px;
-            z-index: 2;
+            top: 60px;
         }
-
         .flame {
             width: 12px;
             height: 18px;
-            background: #ff9800;
+            background: orange;
             border-radius: 50% 50% 20% 20%;
             position: absolute;
             top: -20px;
             left: -2px;
-            animation: flicker 0.6s infinite alternate;
+            animation: glow 0.5s infinite alternate;
         }
 
-        /* State when cut */
-        .cake-base.cut {
-            transform: scaleY(0.7);
-            filter: brightness(0.9);
-        }
+        .cake.cut { transform: scaleY(0.6); filter: saturate(0.5); }
 
-        /* --- Guest Book --- */
-        .guestbook {
-            margin-top: 50px;
-            background: rgba(255, 255, 255, 0.5);
+        /* --- Guestbook --- */
+        .wishes {
+            background: white;
             padding: 30px;
             border-radius: 20px;
+            margin-top: 40px;
         }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
         input {
+            width: 100%;
             padding: 12px;
+            margin: 8px 0;
             border: 1px solid #ddd;
             border-radius: 8px;
         }
+        .btn {
+            background: var(--dark-pink);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
 
-        #wishes-display {
+        #wish-list div {
             text-align: left;
-            margin-top: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
         }
 
-        .wish-card {
-            background: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--primary);
-        }
-
-        /* --- Utility/Animations --- */
-        @keyframes flicker {
-            from { transform: scale(1); opacity: 0.8; }
-            to { transform: scale(1.2); opacity: 1; }
-        }
-
-        canvas {
+        /* --- Confetti --- */
+        #confetti {
             position: fixed;
             top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        /* Responsive Mobile Fix */
-        @media (max-width: 480px) {
-            h1 { font-size: 1.8rem; }
-            .countdown-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        @keyframes glow { from { opacity: 0.6; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div id="welcome-screen">
-        <h2 style="margin-bottom: 20px;">For Jahnavi...</h2>
-        <button class="btn-main" onclick="reveal()">Open Birthday Surprise 🎁</button>
+    <div id="overlay">
+        <h2>Ready for the surprise?</h2>
+        <button class="btn" onclick="init()" style="width: auto; margin-top: 20px;">Open 🎁</button>
     </div>
-
-    <audio id="audio" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
 
     <canvas id="confetti"></canvas>
 
-    <div class="container">
+    <div class="section">
         <header>
-            <h1>Happy Birthday, Jahnavi! 🎂</h1>
+            <h1>Happy Birthday Jahnavi! 🎂</h1>
         </header>
 
-        <div class="countdown-grid">
-            <div class="box"><span id="d">00</span>days</div>
-            <div class="box"><span id="h">00</span>hours</div>
-            <div class="box"><span id="m">00</span>mins</div>
-            <div class="box"><span id="s">00</span>secs</div>
+        <div class="timer">
+            <div class="unit"><span id="d">00</span>d</div>
+            <div class="unit"><span id="h">00</span>h</div>
+            <div class="unit"><span id="m">00</span>m</div>
+            <div class="unit"><span id="s">00</span>s</div>
         </div>
 
-        <div id="typing-area"></div>
+        <div id="typewriter" style="min-height: 60px; font-style: italic; margin-bottom: 30px;"></div>
 
-        <div class="cake-wrapper" onclick="handleCake()">
-            <div class="candle">
-                <div class="flame" id="flame"></div>
-            </div>
-            <div class="cake-base" id="cake-body"></div>
+        <div class="cake-box" onclick="blowCandle()">
+            <div class="candle"><div class="flame" id="flame"></div></div>
+            <div class="cake" id="cake-body"></div>
         </div>
-        <p><i>Click the cake to cut!</i></p>
+        <p style="margin-top: 10px;"><i>Click to cut the cake!</i></p>
 
-        <div class="guestbook">
-            <h3>Send Your Wishes</h3>
-            <div class="input-group">
-                <input type="text" id="gName" placeholder="Your Name">
-                <input type="text" id="gWish" placeholder="Message...">
-                <button class="btn-main" onclick="postWish()" style="font-size: 1rem; padding: 10px;">Post Wish</button>
-            </div>
-            <div id="wishes-display"></div>
+        <div class="wishes">
+            <h3>Send a Wish</h3>
+            <input type="text" id="uName" placeholder="Your Name">
+            <input type="text" id="uWish" placeholder="Your Message">
+            <button class="btn" onclick="saveWish()">Post Wish</button>
+            <div id="wish-list"></div>
         </div>
     </div>
 
     <script>
-        const audio = document.getElementById('audio');
-        
-        // 1. Reveal Function
-        function reveal() {
-            document.getElementById('welcome-screen').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('welcome-screen').style.display = 'none';
-                startType();
-            }, 500);
-            audio.play().catch(() => console.log("Audio blocked by browser."));
+        // 1. Start App
+        function init() {
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => document.getElementById('overlay').style.display = 'none', 500);
+            startTyping();
         }
 
-        // 2. Countdown Logic (Target: April 3, 2026)
+        // 2. Countdown (Target: April 3, 2026)
         const target = new Date("April 3, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const gap = target - now;
-            
-            if(gap < 0) return;
-
-            document.getElementById('d').innerText = Math.floor(gap / (1000 * 60 * 60 * 24));
-            document.getElementById('h').innerText = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('m').innerText = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('s').innerText = Math.floor((gap % (1000 * 60)) / 1000);
+            const diff = target - now;
+            if (diff < 0) return;
+            document.getElementById('d').innerText = Math.floor(diff / (86400000));
+            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000);
         }, 1000);
 
-        // 3. Typing Effect
-        const txt = "To a wonderful person, Jahnavi: May your day be filled with magic, your year with adventure, and your heart with endless joy! 🌟";
-        let idx = 0;
-        function startType() {
-            if(idx < txt.length) {
-                document.getElementById('typing-area').innerHTML += txt.charAt(idx);
-                idx++;
-                setTimeout(startType, 50);
+        // 3. Typewriter
+        const msg = "Wishing you a year full of happiness, success, and love. May all your dreams come true! ✨";
+        let charIdx = 0;
+        function startTyping() {
+            if (charIdx < msg.length) {
+                document.getElementById('typewriter').innerHTML += msg.charAt(charIdx);
+                charIdx++;
+                setTimeout(startTyping, 50);
             }
         }
 
-        // 4. Cake Interaction
-        function handleCake() {
-            document.getElementById('cake-body').classList.add('cut');
+        // 4. Cake & Confetti
+        function blowCandle() {
             document.getElementById('flame').style.display = 'none';
-            triggerConfetti();
+            document.getElementById('cake-body').classList.add('cut');
+            createConfetti();
         }
 
-        // 5. Confetti Canvas
+        // Confetti Logic
         const canvas = document.getElementById('confetti');
         const ctx = canvas.getContext('2d');
-        let pieces = [];
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        let dots = [];
 
-        function triggerConfetti() {
-            for(let i=0; i<100; i++) {
-                pieces.push({
+        function createConfetti() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            for(let i=0; i<80; i++) {
+                dots.push({
                     x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    c: `hsl(${Math.random()*360}, 100%, 50%)`,
-                    s: Math.random() * 3 + 2,
-                    sz: Math.random() * 8 + 4
+                    y: -10,
+                    size: Math.random() * 8 + 4,
+                    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+                    v: Math.random() * 4 + 2
                 });
             }
-            updateConfetti();
+            draw();
         }
 
-        function updateConfetti() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            pieces.forEach((p, i) => {
-                p.y += p.s;
-                ctx.fillStyle = p.c;
-                ctx.fillRect(p.x, p.y, p.sz, p.sz);
-                if(p.y > canvas.height) pieces.splice(i, 1);
+        function draw() {
+            // CRITICAL: This clears the canvas so it doesn't "stretch" or ghost
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            dots.forEach((d, i) => {
+                d.y += d.v;
+                ctx.fillStyle = d.color;
+                ctx.fillRect(d.x, d.y, d.size, d.size);
+                if (d.y > canvas.height) dots.splice(i, 1);
             });
-            if(pieces.length > 0) requestAnimationFrame(updateConfetti);
+            if (dots.length > 0) requestAnimationFrame(draw);
         }
 
-        // 6. Wishes display
-        function postWish() {
-            const n = document.getElementById('gName').value;
-            const w = document.getElementById('gWish').value;
+        // 5. Wishes
+        function saveWish() {
+            const n = document.getElementById('uName').value;
+            const w = document.getElementById('uWish').value;
             if(!n || !w) return;
-            
-            const card = `<div class="wish-card"><strong>${n}</strong>: ${w}</div>`;
-            document.getElementById('wishes-display').innerHTML = card + document.getElementById('wishes-display').innerHTML;
-            
-            document.getElementById('gName').value = "";
-            document.getElementById('gWish').value = "";
+            const item = `<div><strong>${n}:</strong> ${w}</div>`;
+            document.getElementById('wish-list').innerHTML = item + document.getElementById('wish-list').innerHTML;
+            document.getElementById('uName').value = ""; document.getElementById('uWish').value = "";
         }
     </script>
 </body>
